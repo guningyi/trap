@@ -32,7 +32,9 @@ private:
     void ThreadFunc2()
     {
         cout<<"ThreadFunc"<<endl;
-        g_mu.lock(); // 假如执行到这一行时线程crash，g_mu如何释放？
+        // 假如执行到这一行时线程crash，g_mu如何释放？
+        // 有一种方法是使用C++11中的互斥量管理模板 unique_lock<mutex> lk<g_mu>; lk.unlock() 提前解锁
+        g_mu.lock();
         g_flag = false;
         g_mu.unlock();
     }
