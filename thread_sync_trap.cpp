@@ -73,4 +73,18 @@ int main()
    thread useA(UseA, g_a);
    useA.start();
    useA.detach();
+    
+   // 如果主线程可以block，可以这样写。
+   while (g_a == nullptr) {
+       sleep(5); // 睡眠一会儿
+   }
+   // A对象构造完毕后再执行新的线程 
+   thread useA(UseA, g_a);
+   useA.start();
+   useA.detach();
+    
+    
+   // 如果主线程不能block，该如何写？
+   
+   
 }
