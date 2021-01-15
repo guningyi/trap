@@ -82,8 +82,15 @@ int main()
    thread useA(UseA, g_a);
    useA.start();
    useA.detach();
-    
-    
+   
+   // 另一个简洁的写法，既然主线程在这里可以block，也可以不起线程。
+   // 如果业务场景中不存在lionDb重配置的情况。直接函数block主线程
+   while (g_a == nullptr) {
+       sleep(5);
+   }
+   UseA(g_a); 
+
+   
    // 如果主线程不能block，该如何写？
    
    
